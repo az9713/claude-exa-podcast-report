@@ -9,9 +9,9 @@ Roughly 100 candidate episodes were surfaced by semantic search; 46 were examine
 themes, the live disagreements, the recurring companies and people, and a ranked
 "watch these 10 first" list with jump-to timestamps.
 
-### ▶ [Read it live →](https://az9713.github.io/claude-exa-podcast-report/)
+### ▶ [Read it live →](https://az9713.github.io/claude-exa-podcast-report/docs/)
 
-[![Live site preview](docs/preview.png)](https://az9713.github.io/claude-exa-podcast-report/)
+[![Live site preview](docs/preview.png)](https://az9713.github.io/claude-exa-podcast-report/docs/)
 
 ---
 
@@ -19,9 +19,9 @@ themes, the live disagreements, the recurring companies and people, and a ranked
 
 | Path | What it is |
 |---|---|
-| [`docs/index.html`](https://az9713.github.io/claude-exa-podcast-report/) | **Process post-mortem** — what the retrieval layer did, call by call, including what it got wrong |
-| [`docs/report.html`](https://az9713.github.io/claude-exa-podcast-report/report.html) | **The full report** as a web page |
-| [`docs/AI-in-Medicine-Podcast-Report-Nov2026.pdf`](https://az9713.github.io/claude-exa-podcast-report/AI-in-Medicine-Podcast-Report-Nov2026.pdf) | Same report, 15pp PDF, 47 clickable + printed source URLs |
+| [`docs/index.html`](https://az9713.github.io/claude-exa-podcast-report/docs/) | **Process post-mortem** — what the retrieval layer did, call by call, including what it got wrong |
+| [`docs/report.html`](https://az9713.github.io/claude-exa-podcast-report/docs/report.html) | **The full report** as a web page |
+| [`docs/AI-in-Medicine-Podcast-Report-Nov2026.pdf`](https://az9713.github.io/claude-exa-podcast-report/docs/AI-in-Medicine-Podcast-Report-Nov2026.pdf) | Same report, 15pp PDF, 47 clickable + printed source URLs |
 
 ## How it was built
 
@@ -85,13 +85,18 @@ Read these before citing anything.
   by hand from publish fields.
 - Nothing here is investment or medical advice.
 
-## Enabling the live site
+## The live site
 
-Pages is served from `main` → `/docs`. If the link above 404s, Pages has not been switched on
-yet — **Settings → Pages → Source: "Deploy from a branch" → Branch: `main`, folder: `/docs` → Save**.
-It goes live about a minute later at
-`https://az9713.github.io/claude-exa-podcast-report/`. No build step or workflow is required;
-the `docs/` folder is plain static HTML.
+Pages is enabled and serves from `main` → `/` (root), so the URL above renders this README and
+the three documents sit under `/docs/`:
+
+- [`/docs/`](https://az9713.github.io/claude-exa-podcast-report/docs/) — process post-mortem
+- [`/docs/report.html`](https://az9713.github.io/claude-exa-podcast-report/docs/report.html) — full report
+- [`/docs/AI-in-Medicine-Podcast-Report-Nov2026.pdf`](https://az9713.github.io/claude-exa-podcast-report/docs/AI-in-Medicine-Podcast-Report-Nov2026.pdf) — PDF
+
+Everything is plain static HTML; no build step or workflow runs. To drop `/docs/` from the URLs,
+switch **Settings → Pages → folder** to `/docs` and remove the `docs/` segment from the links
+above — the in-page navigation is relative and works either way.
 
 ## Inspiration
 
