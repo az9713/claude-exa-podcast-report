@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How Exa Produced That Report — a post-mortem of the retrieval layer</title>
+<style>
+:root{
+  --ink:#15181c; --mut:#5d6873; --line:#dde3e8; --accent:#0b5a6b; --accent2:#0b3b47;
+  --bg:#fbfcfd; --card:#fff; --code:#eef4f6; --warn:#fbf6ec; --warnline:#e7d6ae;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;}
+.wrap{max-width:860px;margin:0 auto;padding:40px 24px 80px}
+h1{font-size:34px;line-height:1.15;letter-spacing:-.5px;margin:0 0 8px}
+h2{font-size:21px;margin:42px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--accent);color:var(--accent2)}
+h3{font-size:16px;margin:24px 0 6px;color:var(--accent2)}
+.kicker{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.lede{font-size:18px;color:var(--mut);margin:0 0 28px}
+p{margin:0 0 14px}
+ul,ol{margin:0 0 14px;padding-left:22px}
+li{margin-bottom:6px}
+code,.mono{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:13.5px;background:var(--code);padding:1px 5px;border-radius:3px}
+pre{background:var(--code);border-left:3px solid var(--accent);padding:12px 14px;overflow-x:auto;border-radius:0 4px 4px 0;font-size:13px;line-height:1.5;margin:0 0 16px}
+pre code{background:none;padding:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px 20px;margin:0 0 18px}
+.answer{background:#eef6f8;border:1px solid #c3dde4;border-radius:8px;padding:18px 20px;margin:0 0 26px}
+.answer p:last-child{margin-bottom:0}
+.warn{background:var(--warn);border:1px solid var(--warnline);border-radius:8px;padding:16px 20px;margin:0 0 18px}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:0 0 18px}
+th{background:var(--accent2);color:#fff;text-align:left;padding:8px 10px;font-weight:600;font-size:13px}
+td{border-bottom:1px solid var(--line);padding:8px 10px;vertical-align:top}
+tr:nth-child(even) td{background:#f7fafb}
+.num{font-variant-numeric:tabular-nums;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:0 0 24px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:14px}
+.stat b{display:block;font-size:26px;color:var(--accent);line-height:1.1;font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px;color:var(--mut)}
+.yes{color:#1a7f4b;font-weight:700}
+.no{color:#a33;font-weight:700}
+.flow{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px;margin:0 0 20px;overflow-x:auto}
+.small{font-size:13.5px;color:var(--mut)}
+.tag{display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;
+  padding:2px 7px;border-radius:3px;background:var(--code);color:var(--accent2);margin-right:6px}
+hr{border:0;border-top:1px solid var(--line);margin:34px 0}
+.nav{display:flex;flex-wrap:wrap;gap:16px;padding:0 0 22px;margin:0 0 24px;border-bottom:1px solid var(--line);font-size:14px}
+.nav a{color:var(--accent);text-decoration:none;font-weight:600}
+.nav a:hover{text-decoration:underline}
+.footer{font-size:13px;color:var(--mut);margin-top:40px;padding-top:16px;border-top:1px solid var(--line)}
+</style></head><body><div class="wrap">
+
+<div class="nav">
+<a href="./report.html">Full podcast report (web)</a>
+<a href="./AI-in-Medicine-Podcast-Report-Nov2026.pdf">PDF (15pp)</a>
+<a href="https://github.com/az9713/claude-exa-podcast-report">Source on GitHub</a>
+</div>
+<div class="kicker">Process post-mortem · 3 Nov 2026</div>
+<h1>How Exa actually produced that podcast report</h1>
+<p class="lede">What the retrieval layer did, call by call — including the parts it did not do, and where the data came from instead.</p>
+
+<div class="answer">
+<p><strong>Short answer: yes, it searched — and then it read.</strong> Exa did two distinct jobs. First, <em>discovery</em>: eight semantic searches that surfaced roughly 100 candidate episodes from a podcast index of 3.2M episodes. Second, and more importantly, <em>retrieval</em>: fetching the full, speaker-labelled, timestamped transcripts of those episodes so the content could be read rather than guessed at.</p>
+<p>The second job is the one that made the report possible. Without transcript text, you get a list of episode titles and a summary of their marketing blurbs. The timestamps in the "watch these 10 first" section exist only because the underlying words and their time offsets were retrievable.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><b>3</b><span>Exa tools loaded</span></div>
+  <div class="stat"><b>8</b><span>search calls (orchestrator)</span></div>
+  <div class="stat"><b>~100</b><span>candidate episodes surfaced</span></div>
+  <div class="stat"><b>46</b><span>episodes examined</span></div>
+  <div class="stat"><b>1.20M</b><span>tokens of transcript read</span></div>
+</div>
+
+<div class="card" style="border-left:3px solid var(--accent)">
+<p style="margin:0"><span class="tag">Inspiration</span> The brief this run answers comes from
+<a href="https://agentnative.inc/resources/build-your-own-podcast-algorithm">Build Your Own Podcast Algorithm with Claude Code and Exa</a>
+(AgentNative, updated 2 Nov 2026), which proposes using Exa's then-new podcast index to replace
+median-listener recommendation feeds with your own. Its "report on a whole niche" prompt is the one
+executed here, with AI&nbsp;in medicine, pharmacology and drug development substituted for the
+original's AI-at-work niche. This document is the post-mortem of what that prompt actually did.</p>
+</div>
+
+<h2>1. What Exa is, and why it mattered here</h2>
+
+<p>Exa is a search engine built for programs rather than people. The retrieval mechanism is <em>embedding-based</em>: a query is encoded into a vector and matched against vectors of indexed documents, so it retrieves on semantic proximity rather than lexical overlap. That is why the tool's own documentation says to <em>describe the ideal page</em> instead of supplying keywords. It also runs keyword matching as a hybrid fallback, which matters for proper nouns like <span class="mono">rentosertib</span> that have no useful neighbourhood in embedding space.</p>
+
+<p>The decisive fact for this particular request is a capability Exa shipped on <strong>29 October 2026</strong>, five days before you asked: a podcast index of <strong>3.2 million episodes from 119,000 shows, with full transcripts</strong> — about 23.7 billion words, or 2.2 million hours of audio. Each indexed episode carries structured fields: show and episode title, publisher, host and guest names, publish date, duration, and the transcript with speaker labels and time offsets.</p>
+
+<p>That last detail is the whole report. Podcasts are where operators speak candidly and at length before they write anything down, and until that index existed, the content was locked inside audio files that no search engine could read. Your request — "read as many episode transcripts as you can" — was only answerable because that index went live the week before.</p>
+
+<h2>2. The three tools, and which ones ran</h2>
+
+<p>The Exa tools arrived <em>deferred</em>: their names were visible but their parameter schemas were not loaded, so they could not be called. The first action of the session was a single <code>ToolSearch</code> call to fetch all three schemas at once.</p>
+
+<table>
+<tr><th style="width:26%">Tool</th><th style="width:14%">Used?</th><th>What it does and how it was used</th></tr>
+<tr>
+  <td><code>web_search_exa</code></td>
+  <td class="yes">Yes — 8×</td>
+  <td>Semantic search returning ranked results with title, URL, publish date and content highlights. Run from the orchestrator to build the candidate list. Takes <code>query</code>, an <code>objective</code> (a steering/reranking signal, not a hard filter), and <code>numResults</code>.</td>
+</tr>
+<tr>
+  <td><code>web_fetch_exa</code></td>
+  <td class="yes">Yes — heavily</td>
+  <td>Fetches a URL and returns clean markdown. This was the workhorse: the four reader agents called it with <code>maxCharacters: 60000</code>, batching 2–3 URLs per call, to pull complete transcripts. This is the tool that did the actual "reading."</td>
+</tr>
+<tr>
+  <td><code>agent_run</code></td>
+  <td class="no">No</td>
+  <td>Exa's own multi-step research agent, which can run a long autonomous research loop and return structured JSON against a supplied schema. Deliberately skipped — see §7.</td>
+</tr>
+</table>
+
+<h2>3. The actual search log</h2>
+
+<p>Eight searches, issued in three parallel batches. Each was written as a description of the page I wanted to find, with an explicit <code>objective</code> telling the reranker what to prioritise and exclude.</p>
+
+<table>
+<tr><th style="width:5%">#</th><th style="width:55%">Query (paraphrased from the call)</th><th>What it yielded</th></tr>
+<tr><td class="num">1</td><td>podcast episode AI drug discovery 2026</td><td>Hallett/Recursion, Rodriques/Edison, Valo, Kaiser, Summit Lens</td></tr>
+<tr><td class="num">2</td><td>podcast transcript AI in medicine clinical AI episode October 2026</td><td>OpenAI/Singhal, NEJM AI, Signal Room, Goldgof, KFF/Teichmann, Crick panel</td></tr>
+<tr><td class="num">3</td><td>biotech podcast episode AI clinical trials pharma September 2026 transcript</td><td>PhaseV, NetraMark, Ephemeral, Nakskov, TD Cowen/Recursion</td></tr>
+<tr><td class="num">4</td><td>Isomorphic Labs / Lilly / Nvidia AI drug discovery interview 2026 transcript</td><td>Jaderberg, Fuchs/Lilly, Kelleher/NVIDIA</td></tr>
+<tr><td class="num">5</td><td>podcast FDA AI regulation drug development model-informed drug development 2026</td><td>FDA Watch/Malkin, ACT Briefs, QSP/NAMs material</td></tr>
+<tr><td class="num">6</td><td>podcast transcript AI biology virtual cell foundation model drug 2026</td><td>Rives/Biohub, Xaira X-Cell, Markov, Arc</td></tr>
+<tr><td class="num">7</td><td>October 2026 AI biotech founder Cognitive Revolution / Latent Space / a16z Bio</td><td>Leash Bio ×2, Kohli &amp; Candido, Hsu/Arc, Mithrl</td></tr>
+<tr><td class="num">8</td><td>AI toxicity prediction / digital twins / Unlearn / Insilico / Zhavoronkov 2026</td><td>Zhavoronkov ×2, Unlearn, ADMET material</td></tr>
+</table>
+
+<p class="small">Queries 1–3 were broad sector sweeps; 4–8 were targeted gap-fills aimed at named companies, the regulatory angle, and the technical AI-for-biology subfield that the broad sweeps under-served.</p>
+
+<h2>4. The pipeline, end to end</h2>
+
+<div class="flow">
+<pre><code>ToolSearch ──▶ loads 3 Exa schemas
+    │
+    ▼
+web_search_exa × 8  (orchestrator, 3 parallel batches)
+    │   returns ~100 records: title, URL, date, hosts/guests, highlights
+    ▼
+MANUAL TRIAGE  ◀── me, not Exa
+    │   • filter to window 3 Aug – 3 Nov 2026  (discarded Feb/Mar/Jun hits)
+    │   • dedupe across overlapping queries
+    │   • assign 44 episodes to 4 thematic groups
+    ▼
+4 SUBAGENTS IN PARALLEL ── A: discovery leaders   B: AI-for-biology
+                           C: clinical/regulatory  D: clinical medicine
+    │   each: web_fetch_exa (maxCharacters 60000, 2–3 URLs/call)
+    │         + web_search_exa to chase missing transcripts
+    │   ~148 tool calls, ~1.20M tokens of transcript consumed
+    ▼
+4 structured note files (claims + timestamps + quotes + scores)
+    │
+    ▼
+SYNTHESIS ── themes, disagreement matrix, entity frequency, top-10
+    │
+    ▼
+HTML ──▶ headless Chromium ──▶ 12-page PDF</code></pre>
+</div>
+
+<p>The fan-out mattered for a mundane reason: the transcripts consumed about <strong>1.2 million tokens</strong>. No single context window absorbs 44 full-length podcast transcripts. Splitting the reading across four parallel agents, each returning a compressed structured digest, is the only way the volume fits — and it cut wall-clock time to roughly the duration of the slowest reader rather than the sum of all four.</p>
+
+<h2>5. What Exa returned that you can see in the report</h2>
+
+<p>Two features of the returned payloads map directly onto report content:</p>
+
+<h3>Speaker-labelled, timestamped transcript</h3>
+<p>Exa's library pages render transcripts in the form <code>Speaker Name · 00:13.145–03:50.018</code> followed by the utterance. That structure is why the "jump to" segments exist. When a guest's claim was located at a particular offset, that offset could be cited directly. Where an episode's transcript carried <em>no</em> timestamps, the report falls back to the publisher's chapter markers and labels them <span class="mono">ch</span> — the Hallett and AJ Blood entries are the two main cases.</p>
+
+<h3>Structured metadata</h3>
+<p>Publish date, duration, host and guest identity came back as fields rather than having to be parsed out of prose. The date field is what made the three-month window enforceable at all.</p>
+
+<h2>6. Where Exa was <em>not</em> the source</h2>
+
+<div class="warn">
+<p style="margin-bottom:10px"><strong>Honest accounting.</strong> Exa was the entry point for essentially everything, but a large fraction of the transcripts were ultimately read off other sites that Exa <em>found</em> or that <code>web_fetch_exa</code> retrieved:</p>
+<ul style="margin-bottom:0">
+<li><strong>Publisher sites</strong> — <span class="mono">latent.space</span>, <span class="mono">signalroompodcast.com</span>, <span class="mono">tdsecurities.com</span>, <span class="mono">thebigunlock.com</span>, <span class="mono">newsletter.dialectic.fm</span>, <span class="mono">edhub.ama-assn.org</span>.</li>
+<li><strong>Third-party transcript aggregators</strong> — <span class="mono">podcastrex</span>, <span class="mono">spoken.md</span>, <span class="mono">snipd</span>, <span class="mono">pod.wave.co</span>, <span class="mono">podscan.fm</span>, <span class="mono">savlar.com</span>, <span class="mono">fame.so</span>.</li>
+<li><strong>Several of these are paywalled or truncated.</strong> <span class="mono">podcastrex</span> cut off after ~17 minutes; <span class="mono">spoken.md</span> after ~6. In multiple cases the agents recovered the fuller text from Exa's own library page — the a16z/Singhal episode is the one where <em>nothing</em> worked past ~7 minutes, which is why its figures are flagged unverified.</li>
+</ul>
+</div>
+
+<h3>Four things Exa did not do</h3>
+<ol>
+<li><strong>It did not filter by date.</strong> The MCP tool surface exposed only <code>query</code>, <code>objective</code> and <code>numResults</code> — no date-range parameter, though the underlying API supports one. Window enforcement was manual: results from February, March and June 2026 came back and were discarded by reading the publish field. This is the single biggest efficiency loss in the run.</li>
+<li><strong>It did not judge quality.</strong> Every watch-first score, every "this is a vendor pitch", every "this is provisional because the transcript is partial" is editorial judgement applied on top of retrieved text.</li>
+<li><strong>It did not detect that one show is synthetic.</strong> <em>Drug Discovery AI Talk</em> is an AI-narrated "deep dive" format with unnamed synthetic speakers. It reads exactly like a real interview in the index. That was caught by reading it, and it is why the report demotes it to secondary corroboration.</li>
+<li><strong>It did not fix ASR errors.</strong> Transcription is machine-generated, so proper nouns garble: "Accenture" for Exscientia, "Zera" for Xaira, "Optamimus" for Optum UK, "Ray Kurzweil" for Razelle Kurzrock. Several Crick-panel speaker labels are assigned to the wrong person outright. Entity normalisation was manual.</li>
+</ol>
+
+<h2>7. Why <code>agent_run</code> was skipped — and when to use it</h2>
+
+<p>Exa's <code>agent_run</code> would have taken the whole brief as one instruction and returned structured rows against a JSON schema. I skipped it because of a control trade-off worth naming:</p>
+
+<table>
+<tr><th style="width:50%">Hand-driven search + fetch (what ran)</th><th>agent_run</th></tr>
+<tr><td>Each query visible and adjustable; gaps spotted and chased (queries 4–8 were written <em>after</em> seeing 1–3 under-serve the technical subfield).</td><td>One objective, one opaque loop, one result set. Cannot be steered mid-run.</td></tr>
+<tr><td>Full transcript text passes through a reader that can flag partial coverage, synthetic shows, ASR errors.</td><td>Returns distilled findings. A truncated transcript or an AI-generated show would likely arrive as fact.</td></tr>
+<tr><td>Timestamps preserved because the reader saw the raw offsets.</td><td>Timestamps survive only if the schema demands them <em>and</em> the agent respects it.</td></tr>
+<tr><td>Metered by my own calls.</td><td>Metered per run with a dollar budget (default $5 at <code>auto</code>, $20 at <code>ultra</code>).</td></tr>
+</table>
+
+<p>For a report whose entire value rests on verifiable timestamps and on knowing which claims are self-reported, keeping the transcript in view was the right call. <strong>But <code>agent_run</code> is the right tool for the refresh.</strong> Now that the ontology exists — the themes, the disagreement axes, the entity list — a monthly update is a well-specified extraction problem, which is exactly its shape:</p>
+
+<pre><code>agent_run({
+  query: "Find podcasts on AI in drug discovery, pharmacology and
+          clinical medicine published since <last_run_date>.
+          For each: show, episode, date, guest + affiliation,
+          3-6 factual claims with timestamps, and position on:
+          bottleneck / scaling-vs-data / virtual-cell readiness /
+          human-in-loop / timeline forecast.",
+  effort: "high",
+  outputSchema: { /* bounded arrays, evidence field per claim */ },
+  previousRunId: "<last month's run>"   // carries context forward
+})</code></pre>
+
+<h2>8. Three upgrades worth building</h2>
+
+<h3>A forecast ledger</h3>
+<p>This corpus is unusually rich in <em>dated, falsifiable predictions</em>: Rodriques on repurposing in 1–2 years and AI-native drugs in 3–5; Dalton on 40–50% of targets AI-originated by 2030; Rives on an information-level cell model in ~5 years; Alexander's 10%→20% PoS target; Castro's 60%-confidence one-year morbidity claim. Extract every forecast with its speaker, date and resolution horizon into a table and score them as they come due. Within eighteen months you hold a calibration record on named operators that nobody else is keeping — and calibration, not eloquence, is the only durable signal of who to listen to.</p>
+
+<h3>A provenance tier on every claim</h3>
+<p>The corpus mixes four epistemically distinct source types that all look identical in a search result: human interview with primary ASR; publisher-edited transcript; LLM-generated episode summary; and fully synthetic AI-narrated show. Tag every extracted claim with its tier at ingest. A claim sourced from an LLM summary of an AI-narrated show about a company's own press release has passed through four lossy transforms, and the report should be able to say so mechanically rather than by my noticing.</p>
+
+<h3>Metadata-leakage auditing, applied to this pipeline</h3>
+<p>The sharpest finding in the whole report was Leash Bio's: a classifier that predicts <em>which chemist</em> made a molecule predicts its bioactivity as well as the chemical structure does — the model learned provenance, not physics. The same test applies here. Before trusting any thematic conclusion drawn from this corpus, check whether it is predictable from show identity alone. If "the bottleneck is clinical" is simply what guests on sponsor-run pharma podcasts say, regardless of evidence, then the theme is an artefact of which shows Exa surfaced, not a finding about the field. Run the ablation: strip speaker and show, keep only the claims, and see whether the structure survives.</p>
+
+<hr>
+<div class="footer">
+<p><span class="tag">Verification</span> Call counts are from this session's tool log: one <code>ToolSearch</code>, eight <code>web_search_exa</code> calls from the orchestrator, and 148 tool invocations across four subagents (a mix of <code>web_fetch_exa</code>, follow-up searches and file writes — the Exa fetches are the majority but I did not count them individually). Token figures are the reported subagent totals: 258,558 + 335,905 + 275,662 + 326,478 = 1,196,603.</p>
+<p>Index statistics (3.2M episodes, 119k shows, 23.7B words, launched 29 Oct 2026) are as stated by Exa's own announcement, retrieved during search #6.</p>
+</div>
+
+</div></body></html>

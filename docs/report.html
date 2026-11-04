@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<title>AI in Medicine, Pharmacology &amp; Drug Development — Podcast Landscape, Aug–Nov 2026</title>
+<style>
+@page { size: Letter; }
+* { box-sizing: border-box; }
+body { font-family: Georgia, "Times New Roman", serif; font-size: 10.3pt; line-height: 1.45; color:#1d1d1f; margin:0; }
+h1 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 25pt; line-height:1.1; margin: 0 0 6pt; letter-spacing:-0.3px; }
+h2 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 15pt; margin: 20pt 0 6pt; padding-bottom:3pt; border-bottom: 2px solid #0b5a6b; color:#0b3b47; break-after: avoid; }
+h3 { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 11.5pt; margin: 12pt 0 3pt; color:#0b3b47; break-after: avoid; }
+p { margin: 0 0 7pt; }
+ul { margin: 0 0 7pt 0; padding-left: 15pt; }
+li { margin-bottom: 3pt; }
+.sub { font-family: "Helvetica Neue", Arial, sans-serif; color:#555; font-size: 10.5pt; margin-bottom: 14pt; }
+.cover { border-left: 6px solid #0b5a6b; padding: 4pt 0 4pt 14pt; margin-bottom: 14pt; }
+.box { background:#f2f7f8; border:1px solid #cfe1e5; border-radius:4px; padding: 8pt 11pt; margin: 8pt 0 10pt; break-inside: avoid; }
+.box h3 { margin-top: 0; }
+.warn { background:#fbf6ec; border-color:#ead9b4; }
+table { width:100%; border-collapse: collapse; font-size: 9pt; margin: 6pt 0 10pt; }
+th { font-family: "Helvetica Neue", Arial, sans-serif; text-align:left; background:#0b3b47; color:#fff; padding: 4pt 5pt; font-weight:600; }
+td { border-bottom: 1px solid #dde3e5; padding: 4pt 5pt; vertical-align: top; }
+tr { break-inside: avoid; }
+.ep { border: 1px solid #d6dfe2; border-radius: 4px; padding: 8pt 11pt 6pt; margin: 0 0 9pt; break-inside: avoid; }
+.ep .hd { font-family: "Helvetica Neue", Arial, sans-serif; font-weight: 700; font-size: 11pt; color:#0b3b47; }
+.ep .meta { font-family: "Helvetica Neue", Arial, sans-serif; font-size: 8.6pt; color:#666; margin: 1pt 0 4pt; }
+.ep .why { margin: 2pt 0 4pt; }
+.ts { font-family: "Menlo", "Consolas", monospace; font-size: 8.6pt; background:#e8f0f2; padding: 0 3pt; border-radius:2px; white-space: nowrap; }
+.rank { display:inline-block; width:18pt; height:18pt; line-height:18pt; text-align:center; border-radius:50%; background:#0b5a6b; color:#fff; font-size:9.5pt; margin-right:5pt; }
+.small { font-size: 8.8pt; color:#555; }
+.two { columns: 2; column-gap: 18pt; }
+.two li { break-inside: avoid; }
+a { color:#0a4e5e; text-decoration:underline; text-decoration-color:#8fc0cb; }
+.url { font-family:"Menlo","Consolas",monospace; font-size:7.6pt; word-break:break-all; margin:1pt 0 4pt; }
+.url a { color:#0a4e5e; }
+.srctab td { font-size: 8.6pt; } .srctab .num { color:#777; }
+.pb { break-before: page; }
+.tag { font-family: "Helvetica Neue", Arial, sans-serif; font-size:7.8pt; font-weight:700; color:#0b5a6b; text-transform: uppercase; letter-spacing: .5px; }
+</style></head><body>
+
+<div class="cover">
+<div class="tag">Podcast landscape report · window 3 Aug – 3 Nov 2026</div>
+<h1>AI in Medicine, Pharmacology &amp; Drug Development</h1>
+<div class="sub">What the people building it said on air in the past three months: big themes, where they disagree, who keeps coming up, and the 10 episodes to watch first.<br>Compiled 3 November 2026</div>
+</div>
+
+<div class="box">
+<h3>Bottom line</h3>
+<ul>
+<li><b>The consensus has moved downstream.</b> Nearly every serious operator says AI has made <i>discovery</i> faster and cheaper (Recursion: ~80% fewer compounds and 50–70% less time to candidate), but <i>clinical</i> success is unchanged. Approvals are flat at ~40–50 a year, and ~9 in 10 drugs that enter humans still fail. The money and the arguments are shifting toward trial operations, patient selection and portfolio decisions.</li>
+<li><b>Data, not models, is the scarce input.</b> The most technical guests (Leash, Biohub, Arc, DeepMind) agree that public biochemical data is largely "exhaust" and that the bottleneck is measurement. The open question is whether more data plus scale wins, or whether the right kind of data (perturbations, time series, fully measured landscapes) has to come first.</li>
+<li><b>Agents are the new unit of work.</b> This shows up as lab-in-the-loop AI scientists (Edison's Robin/Cosmos, Lilly's automated labs, Insilico's "prompt to drug"), agent skill toolkits (NVIDIA BioNeMo) and, most interestingly, evals with a real answer key (Leash Minos).</li>
+<li><b>In the clinic, the frontier is evidence and safety engineering, not model IQ.</b> The strongest episodes treat AI like a lab assay: validate it locally, monitor drift, run RCTs. One RCT (RECTIFIER, JAMA) showed an 84% increase in trial enrollment. Scribes save time, but patient-outcome benefit is mostly unproven.</li>
+<li><b>Regulation is in motion and thin.</b> FDA created its first Deputy Commissioner for Technology &amp; AI and floated a generative-AI device framework. It also launched an Expedited IND pilot and issued NAM/QSP draft guidances, yet practitioners still call its AI drug-development guidance "thin".</li>
+</ul>
+</div>
+
+<p class="small"><b>Method.</b> I used Exa's podcast index (3.2M episodes with full transcripts), plus show sites, to find ~45 episodes published 3 Aug–3 Nov 2026. 37 were analysed from transcripts (32 full or near-full, 5 partial) and ~9 more from show notes or highlights only. All are flagged in Appendix A. Timestamps are as heard in the transcript; where only publisher chapter markers existed, they are marked "ch". Figures are as stated by guests and are often self-reported, so treat company metrics as claims, not audited facts. One episode, on AI-designed gene-therapy delivery vectors (Core Memory EP86, Dyno Therapeutics), was excluded and is not analysed.</p>
+
+<h2>1. The big themes</h2>
+
+<h3>Theme 1 — "AI speeds discovery; the clinic eats the gains"</h3>
+<p>This was the most repeated idea in the window, and it came from insiders rather than critics. Recursion CSO Dave Hallett gave the cleanest split: compound counts and cycle times are sharply down, but the industry has "still not fundamentally solved" Phase 2 attrition. The number-one reason programmes fail is a wrong causal target. Next, ~20–30% fail because the modality can't reach a high enough dose, and then come patient selection and endpoints (Genetics Podcast, <span class="ts">ch 06:39–18:20</span>). Valo CEO Brian Alexander says AI's productivity gains are being "washed out" by bigger, longer trials, because better standards of care force harder endpoints (MACE instead of lipids). He sets a falsifiable goal of lifting clinical probability of success from 10% to 20%, which would take ~50 Phase 2/3 programmes to prove (<span class="ts">01:42</span>, <span class="ts">32:44</span>). Recursion's Sid Jain (TD Cowen) adds operating numbers: ~60% of protocols need an amendment, ~1 in 5 activated sites never enrols anyone, and most failure is "self-inflicted". Even Dalton's founders, early generative-chemistry pioneers, admit AI is "not having enough of an impact" on industry-wide efficiency yet (<span class="ts">10:03</span>).</p>
+
+<h3>Theme 2 — Measurement is the moat; public data is exhaust</h3>
+<p>Leash Bio's Ian Quigley delivered the window's most memorable result. A classifier trained only to guess <i>which chemist</i> made a ChEMBL molecule (1,815 chemists, 60% top-5 accuracy) predicts bioactivity as well as chemical structure does. In his words, models learn "sociology", not physics (Latent Space, <span class="ts">00:30–01:09</span>). In Leash's Kaggle challenge (~4B measurements, ~2,000 teams) no one beat chance on an unseen chemical library (<span class="ts">27:32–31:53</span>). Biohub's Alex Rives says today's "virtual cells" don't meet the bar, and that measurement is the most fundamental of three missing ingredients. He places an information-level cell model about 5 years out (Cognitive Revolution, <span class="ts">10:05–19:35</span>). Lilly's Chief AI Officer Thomas Fuchs describes the pharma-side version: protein-design training jumped from 5% of Lilly's internal structures to all of them, and millions of <i>failed</i> molecules are now treated as training signal (<span class="ts">08:28</span>).</p>
+
+<h3>Theme 3 — Agents and lab-in-the-loop as the operating model</h3>
+<p>The vocabulary converged on agents, world models, closed loops and verifiable rewards. Isomorphic's Max Jaderberg describes generative design agents scored by predictive "world models", with "half a dozen plus" AlphaFold-class models in-house (<span class="ts">07:36–13:19</span>). Edison's Sam Rodriques says Robin found ROCK inhibitors for dry AMD, with positive mouse data, and that Cosmos runs on partner clouds, Pfizer's among them. Zhavoronkov says Insilico orchestrates ~1,200 discovery tasks with frontier models ("prompt to drug"). NVIDIA's BioNeMo Agent Toolkit packages co-folding, binder design and ADMET as agent "skills". The most rigorous piece is Leash's <b>Minos</b>: pre-measured SAR landscapes where an LLM agent gets a 100-molecule budget and is scored against the true optimum. Across ~90,000 rollouts, stronger models leave dead-end chemistry faster (Latent Space follow-up, <span class="ts">01:30–05:06</span>). Rives frames the whole field as "empirical AI": the LLM recipe of pretraining, elicitation and RLVR, but with the verifier in a wet lab (<span class="ts">43:08</span>).</p>
+
+<h3>Theme 4 — The near-term money is in trial operations</h3>
+<p>If you ask where AI is paying back <i>now</i>, the answers cluster in clinical operations. Recursion reports 30–60% faster recruitment than benchmark rates using real-world data on 300M+ covered lives. Hallett adds that simulating trial criteria widened the reachable population by ~20% (<span class="ts">ch 12:19</span>). The only peer-reviewed RCT in the set is Brigham's RECTIFIER: an LLM reads the chart against each inclusion and exclusion criterion and cites its evidence, with humans confirming. It was validated in NEJM and a JAMA RCT (+84% enrolment, p=0.04), with no bias found by age, sex, race, ethnicity or language (Signal Room, <span class="ts">ch 25:38–34:30</span>). Vendors (PhaseV, Biorce, NetraMark) work on protocol design, causal subgroups and adaptive designs. Biorce's best claim is that an FDA-approved protocol was 86% identical to its AI draft.</p>
+
+<h3>Theme 5 — Clinical AI: validate it like troponin, engineer the system around it</h3>
+<p>The clinical episodes converge on one idea: a probabilistic tool is safe only inside a system. MSK's Gregory Goldgof (DeepHeme, live in clinical hematopathology) validates AI like a lab assay, with SOPs, controls, drift monitors and revalidation on every upgrade. He warns that an uncalibrated model score "is not a probability". He also retells the COVID X-ray "99% accuracy" model that was in fact detecting patient age (AI and Healthcare, <span class="ts">12:13–29:38</span>). Eolas' Declan Kelly uses the same troponin analogy and argues for retrieval over a hospital's own policies rather than fine-tuning. Hippocratic AI says it ran 800,000+ test calls with 7,000 clinicians and uses 30 supervisor LLMs per patient-facing agent. Efficiency gains are real (scribes cut documentation time ~50%), but a Kenya cluster-RCT improved notes without showing patient benefit.</p>
+
+<h3>Theme 6 — Compute sovereignty, open models and geopolitics</h3>
+<p>Pharma is bringing compute in-house. Lilly runs open-weight LLMs on its own B300 cluster ("six or eight months behind" the frontier) for cost, security and supply-chain hedging (<span class="ts">17:07–26:22</span>). BMS is buying NVIDIA Vera Rubin systems. Isomorphic keeps its models internal. Zhavoronkov says large-scale synthesis is realistic only in China and India, calls US-China decoupling politics "absolute nonsense", and has moved partly to Abu Dhabi. FDA Watch's Brian Malkin notes that early IND work is migrating to China. Kaiser (Making Medicine) argues that fragmented US EHR data is a strategic disadvantage against centralised systems and points to Australia's faster trial starts.</p>
+
+<h3>Theme 7 — Regulators are moving, unevenly</h3>
+<p>Within the window, FDA named its first Deputy Commissioner for Technology &amp; AI and issued a generative-AI device discussion paper. That paper uses a two-axis risk model, flags patient-facing tools as higher risk, and relies on post-market re-benchmarking. FDA also opened an Expedited IND pilot, with applications due 30 Oct 2026, and has draft NAM and QSP-for-first-in-human-dose guidances. Even so, Malkin calls drug-development AI guidance "a little bit thin" and says he hasn't seen AI improve candidate selection. On the EU side, Abridge's Nedoszytko describes the AI Act and GDPR as putting health AI in the top risk tier: a GDPR inspector arrived 3 days after press coverage of his tool.</p>
+
+<h2>2. Where they disagree</h2>
+<table>
+<tr><th style="width:21%">Question</th><th style="width:39%">One camp</th><th style="width:40%">Other camp</th></tr>
+<tr><td><b>Where is the real bottleneck?</b></td><td><b>The molecule.</b> Jaderberg (Isomorphic): trials only change once molecules get better; "I don't think we're actually very good at making medicines" <span class="ts">16:03</span>. Zhavoronkov: discovery is largely solved; target discovery is "demonetized".</td><td><b>Clinic and causality</b> (Hallett, Alexander, Jain). <b>Capital allocation:</b> Mukhtar Ahmed (Greenstone) says pharma is "integration poor", and AI's biggest value is killing bad programmes early <span class="ts">02:19–10:43</span>. <b>Measurement:</b> Rives, Quigley.</td></tr>
+<tr><td><b>Scale vs. right data</b></td><td>Quigley is "bitter-lesson-pilled" <i>about data</i>: scale measurement through sequencing and imaging. Hsu: naive scaling "will work", just inefficiently.</td><td>Kohli (DeepMind): don't be dogmatic; AlphaFold's deliberate inductive biases made it data-efficient, and for virtual cells "the data was not there yet". Candido (Biohub): inductive bias helps at small scale but can hurt later.</td></tr>
+<tr><td><b>Are virtual cells real yet?</b></td><td>Arc treats them as a flagship bet. Lilly, NVIDIA and Biohub's $1.8B Virtual Biology Initiative (DOE, NIH, DeepMind, Isomorphic, Meta) are funding at scale.</td><td>Rives (Biohub itself): current models "don't meet" the bar; ~5 years to an information-level model. Hsu wants continuous single-cell time series that doesn't exist yet.</td></tr>
+<tr><td><b>Timelines for AI-native drugs</b></td><td>Rodriques: repurposing hits in 1–2 years, fully AI-driven new drugs in 3–5. Dalton: 40–50% of targets/molecules AI-originated by 2030. Zhavoronkov: "pharmaceutical superintelligence" close.</td><td>Hallett: 5 years "might still be a big ask"; proof means <i>repeated</i> first-in-class approvals. Jaderberg: tools in place in 10–20 years. Malkin: no visible improvement in candidate selection yet.</td></tr>
+<tr><td><b>Does the human make it worse?</b></td><td>Kevin Roose (JAMA): AI plus a human underperforms AI alone because the human second-guesses. Hippocratic: "autopilot, not copilot", within nursing scope.</td><td>Goldgof: humans and AI make <i>different</i> errors, so they are complementary. Kothari: autonomous radiology and pathology AI "falls short every single time". Castro: the AI does not hold the licence.</td></tr>
+<tr><td><b>General vs. specialised models</b></td><td>OpenAI (Singhal): train medical expertise into general frontier models; 300M+ weekly health users. Kelly: frontier model plus local retrieval beats hospital fine-tunes.</td><td>Hippocratic's Shah: "GM vs. Caterpillar". Safety-critical use needs purpose-built redundancy (31 LLMs). Goldgof is sceptical of giant multimodal foundation models for diagnostics.</td></tr>
+<tr><td><b>Black box vs. explainable</b></td><td>PhaseV and NetraMark: causal and explainable with type-I error control or nothing; the model must know "when to say it doesn't know".</td><td>Biorce offers rationale only and keeps model internals as IP. Nedoszytko: EU explainability demands are "impossible"; link outputs to evidence instead.</td></tr>
+<tr><td><b>Open vs. closed</b></td><td>Leash and Biohub release data. NVIDIA and Lilly favour open-weight models on-prem. HCA is an open atlas.</td><td>Isomorphic: models stay internal, partly for bio-resilience. Teichmann flags IP, privacy and whether model weights leak training data.</td></tr>
+</table>
+
+<h2>3. Companies and people who keep coming up</h2>
+<table>
+<tr><th style="width:20%">Entity</th><th style="width:12%">Episodes</th><th>Why it keeps surfacing</th></tr>
+<tr><td><b>Eli Lilly</b></td><td>7+</td><td>The most-cited pharma by far: LillyPod supercomputer, TuneLab federated models for biotechs, partnerships with Isomorphic, Insilico, Profluent and NVIDIA. GLP-1 cash funds the AI bet.</td></tr>
+<tr><td><b>Recursion</b></td><td>5</td><td>Phenomic maps (>1T iPSC neurons, 17k knockouts), the ClinTech recruitment platform, the Roche/Genentech map milestone. Leash's founders came from there.</td></tr>
+<tr><td><b>Insilico Medicine</b></td><td>5</td><td>Rentosertib (TNIK, IPF), described as the first drug with an AI-discovered target <i>and</i> molecule to reach Phase 3; GENESIS-IPF3 reportedly dosed its first patient on 9 Sep 2026. ~30+ development candidates. HKEX-listed.</td></tr>
+<tr><td><b>Isomorphic Labs</b></td><td>5</td><td>The DeepMind spinout's "solve all disease" mission, the IsoDDE drug-design engine, Lilly/Novartis deals, closed models, co-funder of Biohub's VBI.</td></tr>
+<tr><td><b>NVIDIA</b></td><td>5</td><td>BioNeMo and its Agent Toolkit, the Lilly co-innovation lab, BMS "AI factory"; claims antibody-design hit rates went from 1% to 30–40% in a year (unsourced).</td></tr>
+<tr><td><b>Anthropic / OpenAI / Google DeepMind</b></td><td>12+</td><td>Claude Code is used to prototype clinical tools (Nedoszytko placed 3rd of 13,000 in an Anthropic hackathon). Leash ranked frontier models as chemistry agents. OpenAI is pushing general-model health (HealthBench). DeepMind is on AlphaFold limits.</td></tr>
+<tr><td><b>Biohub / Arc Institute</b></td><td>4</td><td>Non-profit "world model of life" efforts: the $1.8B VBI, ESM lineage, Evo, Perturb-seq-scale datasets, Arc Virtual Cell Challenge.</td></tr>
+<tr><td><b>Clinical AI vendors</b></td><td>6</td><td>Hippocratic AI (voice agents, 279M interactions), Abridge (scribes, pre-visit LLM history), Eolas (local-knowledge RAG, ~90% of acute NHS trusts), OpenEvidence (~80% of US physicians in ~2 years), Epic (embedded sepsis and deterioration models).</td></tr>
+<tr><td><b>Others to watch</b></td><td>1–2 each</td><td>Edison Scientific (Pfizer deal), Valo (EMD Serono Parkinson's deal up to $3B; Novo), Leash Bio, Xaira, Chai, Dalton, PhaseV, Biorce, NetraMark, AIwithCare, Ephemeral (ex-Palantir), Mithrl, Magnitude Biosciences.</td></tr>
+</table>
+<p><b>Recurring people:</b> Dave Hallett and Sid Jain (Recursion) · Alex Zhavoronkov (Insilico, 2 shows) · Max Jaderberg (Isomorphic) · Thomas Fuchs (Lilly) · Ian Quigley (Leash, 2 episodes) · Alex Rives, Sal Candido (Biohub) · Pushmeet Kohli (DeepMind) · Patrick Hsu (Arc) · Sam Rodriques (Edison) · Brian Alexander (Valo) · AJ Blood (Brigham) · Gregory Goldgof (MSK) · Munjal Shah (Hippocratic) · Karan Singhal (OpenAI) · Harvey Castro (2 shows). Frequent hosts: Andree Bates (AI for Pharma Growth), the Latent Space AI-for-Science duo (RJ Honicky, Brandon Anderson), Chris Hutchins (Signal Room), and Nathan Labenz (Cognitive Revolution).</p>
+
+<h2 class="pb">4. The 10 episodes to watch first</h2>
+<p class="small">The order is a viewing sequence (frame → data → agents → clinic), not a strict ranking. All ten scored 7–9/10 on signal density, credibility and specificity.</p>
+
+<div class="ep"><div class="hd"><span class="rank">1</span>The Genetics Podcast — EP 256: Cutting through the AI hype in drug discovery (Dave Hallett, Recursion CSO)</div>
+<div class="meta">10 Sep 2026 · ~41 min · host Patrick Short</div>
+<div class="url"><a href="https://share.snipd.com/episode/ab63e83b-6aee-4c20-b4f5-17c9c5b9a790">https://share.snipd.com/episode/ab63e83b-6aee-4c20-b4f5-17c9c5b9a790</a></div>
+<p class="why">The best single map of where AI is real and where it is hype, from a 30-year medicinal chemist with hard numbers. Start here.</p>
+<ul><li><span class="ts">ch 06:39–14:46</span> Real wins (80% fewer compounds, trial simulation that widened the reachable population ~20%) vs. what's overstated (organism-level biology, idiosyncratic tox, co-folding out-of-domain).</li>
+<li><span class="ts">ch 14:46–18:20</span> Why programmes fail: causal target, then dose, then patient selection and endpoints.</li>
+<li><span class="ts">ch 30:52–34:57</span> What would count as proof: repeated first-in-class approvals.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">2</span>Latent Space (AI for Science) — Lab-in-the-Loop at Compute Speed (Ian Quigley, Leash Bio)</div>
+<div class="meta">14 Oct 2026 · 1:50 · hosts RJ Honicky, Brandon Anderson</div>
+<div class="url"><a href="https://lspace.beehiiv.com/podcast/s/latent_space_the_ai_engineer_podcast/lab-in-the-loop_at_compute_speed_ian_quigley_leash_bio">https://lspace.beehiiv.com/podcast/s/latent_space_the_ai_engineer_podcast/lab-in-the-loop_at_compute_speed_ian_quigley_leash_bio</a></div>
+<p class="why">The most epistemically rigorous AI-chemistry conversation of the quarter. It is a masterclass in leakage, splits and baselines.</p>
+<ul><li><span class="ts">00:00–01:22</span> "Name that chemist": author identity predicts activity as well as structure does.</li>
+<li><span class="ts">27:32–34:00</span> Kaggle with ~4B measurements, where nobody beat chance on an unseen library; plain SMILES beat fancier representations.</li>
+<li><span class="ts">40:38–46:17</span> The Hermes model vs. XGBoost under building-block cluster splits.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">3</span>The Cognitive Revolution — A World Model of Life (Alex Rives, Biohub)</div>
+<div class="meta">20 Oct 2026 · ~63 min · host Nathan Labenz</div>
+<div class="url"><a href="https://podfollow.com/the-cognitive-revolution-ai-builders-researchers-and-live-player-analysis/episode/bba9b03e7b2717cf3df2926893d2c79eb611fb58/view">https://podfollow.com/the-cognitive-revolution-ai-builders-researchers-and-live-player-analysis/episode/bba9b03e7b2717cf3df2926893d2c79eb611fb58/view</a></div>
+<p class="why">The ESM creator's sober statement of what a virtual cell needs and what $1.8B buys. A good counterweight to vendor optimism.</p>
+<ul><li><span class="ts">09:18–13:37</span> Why current "virtual cells" fall short: modelling paradigm, data and measurement.</li>
+<li><span class="ts">14:41–19:35</span> The 5-year target: a probabilistic state-transition model of the cell.</li>
+<li><span class="ts">42:24–46:08</span> "Empirical AI": RLVR with a wet-lab verifier.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">4</span>Latent Space (lightning) — An Eval for AI Scientists That Knows the Answer Key (Ian Quigley)</div>
+<div class="meta">26 Oct 2026 · 16 min</div>
+<div class="url"><a href="https://podcastrex.com/shows/latent-space-the-ai-engineer-podcast/an-eval-for-ai-scientists-that-knows-the-answer-key-ian-quigley-leash-bio">https://podcastrex.com/shows/latent-space-the-ai-engineer-podcast/an-eval-for-ai-scientists-that-knows-the-answer-key-ian-quigley-leash-bio</a></div>
+<p class="why">A short companion to #2, and the most relevant episode for a solo AI builder: open RL environments for chemistry agents, with model rankings.</p>
+<ul><li><span class="ts">01:30–05:06</span> Minos setup; stronger models leave dead-end chemistry faster.</li>
+<li><span class="ts">07:23–08:49</span> Leaderboard across frontier and open models.</li>
+<li><span class="ts">12:04–15:05</span> "Lab in the loop with amortized latency"; scaling to ~20 environments a day.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">5</span>AI Proving Ground (WWT) — Eli Lilly Built an AI Supercomputer to Ask Bigger Questions (Thomas Fuchs, Lilly CAIO)</div>
+<div class="meta">26 Aug 2026 · 46 min · host Brian Felt</div>
+<div class="url"><a href="https://exa.ai/library/podcast/jq45lkh2gzc/episode/c8tvlqg4jdx">https://exa.ai/library/podcast/jq45lkh2gzc/episode/c8tvlqg4jdx</a></div>
+<p class="why">A rare inside view of how the most AI-aggressive big pharma actually uses compute, data and models.</p>
+<ul><li><span class="ts">08:28–14:18</span> Failed molecules as training data; agentic design-make-test-learn labs.</li>
+<li><span class="ts">21:10–26:22</span> Open-weight LLMs on-prem on B300s; model routing; token economics.</li>
+<li><span class="ts">32:00–34:53</span> Chemists using moves they learned from AI; manufacturing ROI that exceeds total AI spend.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">6</span>Beyond Biotech (Labiotech) — How Flagship's Valo is reshaping AI drug discovery with human data (Brian Alexander)</div>
+<div class="meta">2 Oct 2026 · 36 min · host Dylan Kissane</div>
+<div class="url"><a href="https://share.snipd.com/episode/a345cc60-0cd1-4f47-8891-4ca8d656bb15">https://share.snipd.com/episode/a345cc60-0cd1-4f47-8891-4ca8d656bb15</a></div>
+<p class="why">The clearest argument for why AI hasn't moved R&amp;D productivity, plus a numeric, checkable target.</p>
+<ul><li><span class="ts">01:42–04:16</span> Gains "washed out" by larger, longer trials.</li>
+<li><span class="ts">09:07–16:22</span> Human causal biology from ~17–20M longitudinal records; Parkinson's as several diseases.</li>
+<li><span class="ts">32:44–35:18</span> The math of going from 10% to 20% PoS and how many programmes it takes to prove it.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">7</span>The AI in Business Podcast (Emerj) — Where AI Should Actually Earn Its Keep in Biopharma (Mukhtar Ahmed)</div>
+<div class="meta">29 Sep 2026 · 22 min · host Daniel Faggella</div>
+<div class="url"><a href="https://spoken.md/episode/where-ai-should-actually-earn-its-keep-in-biopharma-1000792143206">https://spoken.md/episode/where-ai-should-actually-earn-its-keep-in-biopharma-1000792143206</a></div>
+<p class="why">The sharpest contrarian thesis: AI investment is aimed at the wrong layer. It reframes drug R&amp;D as capital allocation.</p>
+<ul><li><span class="ts">02:19–06:05</span> Wrong-bottleneck thesis; DSP-1181 reached Phase 1 in 12 months, then died.</li>
+<li><span class="ts">07:35–10:43</span> "Integration poor": weighting evidence by decision relevance.</li>
+<li><span class="ts">19:25–20:35</span> KPI: uncertainty removed per next dollar committed.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">8</span>The Signal Room — AI Clinical Trial Screening (Dr. AJ Blood, Brigham / AIwithCare)</div>
+<div class="meta">14 Oct 2026 · ~52 min · host Chris Hutchins</div>
+<div class="url"><a href="https://signalroompodcast.com/episodes/ai-clinical-trial-screening">https://signalroompodcast.com/episodes/ai-clinical-trial-screening</a></div>
+<p class="why">The only episode with randomised evidence (NEJM plus a JAMA RCT). It shows what "AI held to medicine's evidence bar" looks like.</p>
+<ul><li><span class="ts">ch 15:14–25:38</span> The screening problem (~90% of charts opened are ineligible) and how RECTIFIER cites chart evidence.</li>
+<li><span class="ts">ch 25:38–34:30</span> Results: +84% enrolment, bias audit across demographics and language.</li>
+<li><span class="ts">ch 38:41–48:16</span> "Death by pilot": workflow beats model.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">9</span>AI and Healthcare — How AI Reads Blood Cells to Help Diagnose Cancer (Gregory Goldgof, MSK)</div>
+<div class="meta">27 Oct 2026 · 46 min · hosts Sanjay Juneja, Doug Flora</div>
+<div class="url"><a href="https://podscan.fm/podcasts/ai-and-healthcare/episodes/how-ai-reads-blood-cells-to-help-diagnose-cancer-with-gregory-goldgof-md-phd">https://podscan.fm/podcasts/ai-and-healthcare/episodes/how-ai-reads-blood-cells-to-help-diagnose-cancer-with-gregory-goldgof-md-phd</a></div>
+<p class="why">The most rigorous clinical-deployment story: a real model, live in a real lab, with calibration and drift treated seriously.</p>
+<ul><li><span class="ts">06:25–09:35</span> The path to the first fully digital heme-path service.</li>
+<li><span class="ts">12:13–16:08</span> The COVID X-ray "99%" model that was detecting age.</li>
+<li><span class="ts">22:38–29:38</span> Validate like troponin; uncalibrated scores aren't probabilities; rare-case failure.</li></ul></div>
+
+<div class="ep"><div class="hd"><span class="rank">10</span>CareTalk — Voice AI Is Expanding Access to Healthcare (Munjal Shah, Hippocratic AI)</div>
+<div class="meta">2 Oct 2026 · 27 min (plus 7 Oct safety clip) · host John Driscoll</div>
+<div class="url"><a href="https://exa.ai/library/podcast/0th62bf2yxn/episode/l1g4hxnvz4l">https://exa.ai/library/podcast/0th62bf2yxn/episode/l1g4hxnvz4l</a></div>
+<p class="why">The boldest patient-facing deployment and its safety architecture. Figures are self-reported but specific.</p>
+<ul><li><span class="ts">08:46–11:25</span> Why "AI doctor" is the wrong product; agents work within nursing scope.</li>
+<li><span class="ts">16:25–19:06</span> Lost-to-follow-up lung screening: 1,700 patients, 180 scans, 3 cancers found.</li>
+<li><span class="ts">24:41–26:29</span> Safety stack: 800k test calls, 30 supervisor LLMs, don't ship until safer than a human.</li></ul></div>
+
+<div class="box"><h3>Next tier (if you want 5 more)</h3>
+<ul>
+<li><b>Giant Ideas — Max Jaderberg (Isomorphic)</b>, 8 Oct: the bull case for the molecule-is-the-bottleneck view <span class="ts">09:42–17:47</span>; closed models and biosecurity <span class="ts">21:27–23:13</span>.</li>
+<li><b>TD Cowen Machine Medicine — Sid Jain (Recursion)</b>, 1 Sep: the densest clinical-ops numbers (no timestamps; 21 min, so just play it).</li>
+<li><b>Latent Space — Kohli &amp; Candido</b>, ~9 Oct: AlphaFold's limits and the scaling-vs-priors debate <span class="ts">04:54–17:39</span>.</li>
+<li><b>Signal Room — Declan Kelly (Eolas)</b>, 28 Oct: local-knowledge RAG plus a second model as safety reviewer; the OpenEvidence growth story.</li>
+<li><b>Dialectic — Patrick Hsu (Arc)</b>, 16 Oct: data shape, research taste, lab robots <span class="ts">25:51–49:31</span>.</li>
+</ul></div>
+
+<h2>5. What this implies (builder and investor lens)</h2>
+<div class="two">
+<h3>Build angles</h3>
+<ul>
+<li><b>Agent evals with a real answer key.</b> Leash is releasing the Minos environments, transcripts and a preprint, and its Kaggle data sits on Polaris. That makes possible a solo project: an RL or prompting harness for medicinal-chemistry agents, benchmarked against fully measured landscapes. This is where the field is going, and it needs no wet lab.</li>
+<li><b>The decision layer.</b> Ahmed's "integration poor" thesis is wide open: an agent that pulls together public trial, regulatory, IP and literature evidence into go/no-go memos for small biotechs. RECTIFIER shows the evidence pattern, which is to cite every claim back to source.</li>
+<li><b>Leakage audits as a product.</b> The "name that chemist" trick generalises. Test any bio-ML claim by asking whether a metadata-only model matches it. If it does, the model learned provenance, not biology.</li>
+<li><b>A podcast-intelligence pipeline.</b> Exa's transcript index makes this report repeatable. It could be a quarterly scan that tracks claims (dates, numbers, forecasts) and scores them later against outcomes, a personal "forecast ledger" for the field.</li>
+</ul>
+<h3>Market angles (not investment advice)</h3>
+<ul>
+<li><b>LLY</b> is the consensus AI-pharma integrator: compute, data, partnerships and GLP-1 cash flow.</li>
+<li><b>NVDA</b> sells the picks and shovels: BioNeMo, BMS and Lilly on-prem builds.</li>
+<li><b>RXRX</b> and <b>Insilico (HKEX: 3696)</b> are binary-ish clinical bets. Rentosertib's Phase 3 is the field's highest-profile test, with readout years away.</li>
+<li>Clinical-ops AI is mostly private (Hippocratic, Abridge, PhaseV). Public exposure is via EHR and data names (e.g., TEM) and CRO disruption risk (IQVIA, ICON), the latter flagged by Ephemeral's point about CRO incentives.</li>
+<li>Basket ETFs: XBI, IBB (biotech beta), ARKG (genomics/AI-bio, high volatility).</li>
+<li><b>Signals to watch:</b> Phase 2 readouts of AI-originated assets; FDA's final AI drug-development guidance; whether Biohub/Arc virtual-cell models predict prospective perturbations.</li>
+</ul>
+</div>
+
+<div class="box warn"><h3>Caveats</h3>
+<ul>
+<li>Several figures are company-reported and unaudited (Hippocratic, Insilico candidate counts that vary by source, NVIDIA's hit-rate claim, Biorce's "236 hours saved").</li>
+<li>Drug Discovery AI Talk (Dr. Jake Chen) uses an AI-narrated "deep dive" format. I used it only as secondary corroboration (for example, rentosertib's Phase 3 details).</li>
+<li>Partial transcripts: the a16z/Singhal episode was read only to ~07:00 (later claims unverified); Making Medicine/Kaiser only to ~08:00; Rives to ~52 of 63 min; Quigley ep. 1 to ~46 min of 110.</li>
+<li>Auto-transcripts garble names. Corrections were applied where obvious (e.g., Exscientia, Razelle Kurzrock, Optum UK).</li>
+</ul></div>
+
+<h2 class="pb">Appendix A — Episode coverage</h2>
+<table>
+<tr><th style="width:34%">Show — guest</th><th style="width:10%">Date</th><th style="width:16%">Source read</th><th>One-line takeaway</th></tr>
+<tr><td>Genetics Podcast — Hallett (Recursion)</td><td>Sep 10</td><td>Full (chapter times)</td><td>Discovery faster; Phase 2 unsolved; failure anatomy.</td></tr>
+<tr><td>MTS — Sam Rodriques (Edison)</td><td>Oct 31</td><td>Full</td><td>Pfizer deal; repurposing in 1–2 yrs; new AI drugs in 3–5.</td></tr>
+<tr><td>Beyond Biotech — Brian Alexander (Valo)</td><td>Oct 2</td><td>Full</td><td>Gains washed out clinically; PoS 10%→20% goal.</td></tr>
+<tr><td>Making Medicine — Thomas Kaiser (Avicenna)</td><td>Oct 1</td><td>Partial + notes</td><td>11 compounds → 2 candidates on ~$25M; data reproducibility.</td></tr>
+<tr><td>Giant Ideas — Max Jaderberg (Isomorphic)</td><td>Oct 8</td><td>Full</td><td>Design engine + world models; closed models.</td></tr>
+<tr><td>AI Proving Ground — Thomas Fuchs (Lilly)</td><td>Aug 26</td><td>Full</td><td>On-prem compute, failure data, agentic labs.</td></tr>
+<tr><td>What's Up with Tech — Rory Kelleher (NVIDIA)</td><td>Aug 27</td><td>Full</td><td>BioNeMo agent skills; BMS first-in-human molecule.</td></tr>
+<tr><td>The BioHub — Dalton Therapeutics</td><td>Oct 22</td><td>Full</td><td>Honest: industry impact small so far; 40–50% by 2030.</td></tr>
+<tr><td>The Big Unlock — Alex Zhavoronkov (Insilico)</td><td>Aug 20</td><td>Full (edited, untimed)</td><td>Prompt-to-drug; China/India synthesis; moats are drugs.</td></tr>
+<tr><td>Inside AsembleAI — Zhavoronkov</td><td>Aug 17</td><td>Show notes</td><td>33 candidates, zero tox failures (claimed).</td></tr>
+<tr><td>Latent Space — Ian Quigley (Leash) ×2</td><td>Oct 14/26</td><td>Partial / near-full</td><td>Chemist sociology; Kaggle; Minos agent evals.</td></tr>
+<tr><td>Cognitive Revolution — Alex Rives (Biohub)</td><td>Oct 20</td><td>Near-full</td><td>Virtual cells not there; measurement first; $1.8B VBI.</td></tr>
+<tr><td>Latent Space — Kohli &amp; Candido</td><td>~Oct 9</td><td>Full (edited)</td><td>Scaling laws aren't everywhere; AlphaFold limits.</td></tr>
+<tr><td>Dialectic — Patrick Hsu (Arc)</td><td>Oct 16</td><td>Partial (to ~62 min)</td><td>Data shape; time series; perturbations as action labels.</td></tr>
+<tr><td>Drug Discovery AI Talk #72, #77, #79</td><td>Sep 4–Oct 23</td><td>Highlights (AI-narrated)</td><td>AI drug discovery "3.0"; virtual-biology reality check; rentosertib Ph3.</td></tr>
+<tr><td>Summit Lens — Can AI Build a Drug?; GSD — Fozia Saleem; BioCentury — Abecasis; Data in Biotech — DrugBank</td><td>Sep 4–Oct 27</td><td>Show notes only</td><td>Pipeline walkthrough; whole-organism screening; genetics-led targets; grounding layers.</td></tr>
+<tr><td>TD Cowen — Sid Jain (Recursion)</td><td>Sep 1</td><td>Full (untimed)</td><td>Development is the bottleneck; 30–60% faster recruitment.</td></tr>
+<tr><td>AI for Pharma Growth E236 — PhaseV</td><td>Sep 22</td><td>Full</td><td>Causal ML; adaptive designs with type-I control.</td></tr>
+<tr><td>AI for Pharma Growth E239 — Biorce</td><td>Oct 13</td><td>Full</td><td>~940k annotated protocols; 86% match to approved protocol.</td></tr>
+<tr><td>Beyond Compliance — NetraMark</td><td>Sep 9</td><td>Full</td><td>Explainable subgroups; knowing what it doesn't know.</td></tr>
+<tr><td>Med Tech Gurus — Christianson</td><td>Sep 9</td><td>Full</td><td>Start with the bottleneck; digital twins inform, not replace.</td></tr>
+<tr><td>Pharma Prescribed — Nakskov</td><td>Sep 29</td><td>Partial</td><td>Data provenance; AI needs more surveillance, not less.</td></tr>
+<tr><td>Emerj — Mukhtar Ahmed</td><td>Sep 29</td><td>Full</td><td>Decision layer &gt; molecule layer.</td></tr>
+<tr><td>Future of Healthcare AI — Ephemeral</td><td>Sep 14</td><td>Full</td><td>Rhetoric–reality gap; CRO incentives misaligned.</td></tr>
+<tr><td>Signal Room — AJ Blood</td><td>Oct 14</td><td>Full (chapter times)</td><td>RCT-proven trial screening.</td></tr>
+<tr><td>FDA Watch — Brian Malkin</td><td>Oct 12</td><td>Full</td><td>Expedited IND pilot; FDA AI guidance "thin"; NAMs.</td></tr>
+<tr><td>ACT Briefs (Aug 20, Sep 10)</td><td>Aug–Sep</td><td>Full</td><td>Gen-AI device framework; new FDA AI deputy commissioner.</td></tr>
+<tr><td>C-Path — NAMs</td><td>~Oct 1</td><td>Show notes</td><td>Context-of-use qualification for NAMs.</td></tr>
+<tr><td>a16z — Karan Singhal (OpenAI)</td><td>Oct 20</td><td>Partial (to ~07:00)</td><td>300M weekly health users; general-model strategy.</td></tr>
+<tr><td>NEJM AI Grand Rounds — Nedoszytko (Abridge)</td><td>Oct 21</td><td>Near-full</td><td>Physician-builders; EU vs US regulation.</td></tr>
+<tr><td>JAMA — Kevin Roose</td><td>Oct 22</td><td>Full (untimed)</td><td>AI alone may beat AI+human.</td></tr>
+<tr><td>Critical Care Scenarios — Harvey Castro</td><td>Oct 14</td><td>Full</td><td>Practical use; deskilling; liability stays with MD.</td></tr>
+<tr><td>Signal Room — Declan Kelly (Eolas)</td><td>Oct 28</td><td>Full (untimed)</td><td>Local-knowledge RAG; troponin analogy.</td></tr>
+<tr><td>Healthcare Unfiltered — Anai Kothari</td><td>Oct 27</td><td>Full</td><td>Autonomous AI falls short; local degradation.</td></tr>
+<tr><td>CareTalk — Munjal Shah (Hippocratic)</td><td>Oct 2/7</td><td>Full</td><td>Voice agents; safety stack.</td></tr>
+<tr><td>Voices in Oncology — David McSwain (UNC)</td><td>Oct 23</td><td>Full</td><td>NC-CHAIN; rural equity; vendor questionnaires.</td></tr>
+<tr><td>AI and Healthcare — Gregory Goldgof (MSK)</td><td>Oct 27</td><td>Full</td><td>DeepHeme; calibration; confounders.</td></tr>
+<tr><td>KFF — Sarah Teichmann (HCA)</td><td>Oct 27</td><td>Full</td><td>Cell atlas predicts trial success (preprint).</td></tr>
+<tr><td>A Question of Science — Crick panel</td><td>Oct 7</td><td>Full</td><td>UK Biobank risk models; bias statistics; 100-days mission.</td></tr>
+<tr><td>Signal and Symptoms — Castro &amp; Kalia</td><td>Oct 23</td><td>Full</td><td>Six-pillar AI checklist; golden datasets.</td></tr>
+</table>
+
+<h2>Appendix B — Sources</h2>
+<p class="small">Full URLs are printed so every source is reachable from a printed copy as well as by click. Titles are clickable in any PDF reader that supports link annotations.</p>
+<table class="srctab">
+<tr><th style="width:5%">#</th><th>Episode and URL</th></tr>
+<tr><td class="num">1</td><td><b>The Genetics Podcast EP256 — Dave Hallett (Recursion)</b><div class="url"><a href="https://share.snipd.com/episode/ab63e83b-6aee-4c20-b4f5-17c9c5b9a790">https://share.snipd.com/episode/ab63e83b-6aee-4c20-b4f5-17c9c5b9a790</a></div></td></tr>
+<tr><td class="num">2</td><td><b>MTS — Sam Rodriques (Edison Scientific)</b><div class="url"><a href="https://share.snipd.com/episode/7bced24a-a07b-4259-9711-8a734268fccd">https://share.snipd.com/episode/7bced24a-a07b-4259-9711-8a734268fccd</a></div></td></tr>
+<tr><td class="num">3</td><td><b>Beyond Biotech — Brian Alexander (Valo)</b><div class="url"><a href="https://share.snipd.com/episode/a345cc60-0cd1-4f47-8891-4ca8d656bb15">https://share.snipd.com/episode/a345cc60-0cd1-4f47-8891-4ca8d656bb15</a></div></td></tr>
+<tr><td class="num">4</td><td><b>Making Medicine — Thomas Kaiser (Avicenna)</b><div class="url"><a href="https://www.spreaker.com/episode/ai-in-drug-discovery-what-works-what-s-hype-what-comes-next--75468610">https://www.spreaker.com/episode/ai-in-drug-discovery-what-works-what-s-hype-what-comes-next--75468610</a></div></td></tr>
+<tr><td class="num">5</td><td><b>Giant Ideas — Max Jaderberg (Isomorphic Labs)</b><div class="url"><a href="https://exa.ai/library/podcast/gtvy7tqcgzl/episode/yrpq9px1497">https://exa.ai/library/podcast/gtvy7tqcgzl/episode/yrpq9px1497</a></div></td></tr>
+<tr><td class="num">6</td><td><b>AI Proving Ground — Thomas Fuchs (Eli Lilly)</b><div class="url"><a href="https://exa.ai/library/podcast/jq45lkh2gzc/episode/c8tvlqg4jdx">https://exa.ai/library/podcast/jq45lkh2gzc/episode/c8tvlqg4jdx</a></div></td></tr>
+<tr><td class="num">7</td><td><b>What's Up with Tech — Rory Kelleher (NVIDIA)</b><div class="url"><a href="https://exa.ai/library/podcast/fvlbh920xyr/episode/txwmztfphpb">https://exa.ai/library/podcast/fvlbh920xyr/episode/txwmztfphpb</a></div></td></tr>
+<tr><td class="num">8</td><td><b>The BioHub ep250 — Dalton Therapeutics</b><div class="url"><a href="https://exa.ai/library/podcast/bgy09rs3078/episode/j1zkpzswzf7">https://exa.ai/library/podcast/bgy09rs3078/episode/j1zkpzswzf7</a></div></td></tr>
+<tr><td class="num">9</td><td><b>The Big Unlock ep222 — Alex Zhavoronkov (Insilico)</b><div class="url"><a href="https://thebigunlock.com/2026/08/20/ai-is-moving-drug-discovery-from-prediction-to-generation/">https://thebigunlock.com/2026/08/20/ai-is-moving-drug-discovery-from-prediction-to-generation/</a></div></td></tr>
+<tr><td class="num">10</td><td><b>Inside AsembleAI EP53 — Alex Zhavoronkov</b><div class="url"><a href="https://rss.com/podcasts/asemble-mac-and-sam/3123254/">https://rss.com/podcasts/asemble-mac-and-sam/3123254/</a></div></td></tr>
+<tr><td class="num">11</td><td><b>Latent Space — Ian Quigley (Leash Bio), 14 Oct</b><div class="url"><a href="https://lspace.beehiiv.com/podcast/s/latent_space_the_ai_engineer_podcast/lab-in-the-loop_at_compute_speed_ian_quigley_leash_bio">https://lspace.beehiiv.com/podcast/s/latent_space_the_ai_engineer_podcast/lab-in-the-loop_at_compute_speed_ian_quigley_leash_bio</a></div></td></tr>
+<tr><td class="num">12</td><td><b>Latent Space — Ian Quigley (Leash Bio), 26 Oct</b><div class="url"><a href="https://podcastrex.com/shows/latent-space-the-ai-engineer-podcast/an-eval-for-ai-scientists-that-knows-the-answer-key-ian-quigley-leash-bio">https://podcastrex.com/shows/latent-space-the-ai-engineer-podcast/an-eval-for-ai-scientists-that-knows-the-answer-key-ian-quigley-leash-bio</a></div></td></tr>
+<tr><td class="num">13</td><td><b>The Cognitive Revolution — Alex Rives (Biohub)</b><div class="url"><a href="https://podfollow.com/the-cognitive-revolution-ai-builders-researchers-and-live-player-analysis/episode/bba9b03e7b2717cf3df2926893d2c79eb611fb58/view">https://podfollow.com/the-cognitive-revolution-ai-builders-researchers-and-live-player-analysis/episode/bba9b03e7b2717cf3df2926893d2c79eb611fb58/view</a></div></td></tr>
+<tr><td class="num">14</td><td><b>Latent Space — Pushmeet Kohli (DeepMind) & Sal Candido (Biohub)</b><div class="url"><a href="https://www.thepodcastsummary.com/episodes/NufiHZfMwaw/ten-x-breakthroughs-translational-medicine-biohub.html">https://www.thepodcastsummary.com/episodes/NufiHZfMwaw/ten-x-breakthroughs-translational-medicine-biohub.html</a></div></td></tr>
+<tr><td class="num">15</td><td><b>Dialectic — Patrick Hsu (Arc Institute)</b><div class="url"><a href="https://newsletter.dialectic.fm/p/patrick-hsu">https://newsletter.dialectic.fm/p/patrick-hsu</a></div></td></tr>
+<tr><td class="num">16</td><td><b>Drug Discovery AI Talk #79 — Can AI Drug the Undruggable?</b><div class="url"><a href="https://pod.wave.co/podcast/drug-discovery-ai-talk/79-can-ai-drug-the-undruggable">https://pod.wave.co/podcast/drug-discovery-ai-talk/79-can-ai-drug-the-undruggable</a></div></td></tr>
+<tr><td class="num">17</td><td><b>Drug Discovery AI Talk — Virtual Biology's Reality Check</b><div class="url"><a href="https://exa.ai/library/podcast/mnhf5z9fb9b/episode/97djg2hdjfd">https://exa.ai/library/podcast/mnhf5z9fb9b/episode/97djg2hdjfd</a></div></td></tr>
+<tr><td class="num">18</td><td><b>Drug Discovery AI Talk #72 — 2026 Emerging Trends</b><div class="url"><a href="https://exa.ai/library/podcast/mnhf5z9fb9b/episode/f3zb3p77qmk">https://exa.ai/library/podcast/mnhf5z9fb9b/episode/f3zb3p77qmk</a></div></td></tr>
+<tr><td class="num">19</td><td><b>Summit Lens ep13 — Can AI Build a Drug?</b><div class="url"><a href="https://exa.ai/library/podcast/gg1nf2lm50w/episode/wds36zw13qm">https://exa.ai/library/podcast/gg1nf2lm50w/episode/wds36zw13qm</a></div></td></tr>
+<tr><td class="num">20</td><td><b>GSD Venture Studios — Fozia Saleem (Magnitude Biosciences)</b><div class="url"><a href="https://exa.ai/library/podcast/t1jn0jwmsm7/episode/srxhdyjfsdt">https://exa.ai/library/podcast/t1jn0jwmsm7/episode/srxhdyjfsdt</a></div></td></tr>
+<tr><td class="num">21</td><td><b>The BioCentury Show Ep118 — Gonçalo Abecasis (Regeneron)</b><div class="url"><a href="https://share.snipd.com/episode/66b3f83e-7c9f-468e-bab4-7c7668c83089">https://share.snipd.com/episode/66b3f83e-7c9f-468e-bab4-7c7668c83089</a></div></td></tr>
+<tr><td class="num">22</td><td><b>TD Cowen Machine Medicine — Sid Jain (Recursion)</b><div class="url"><a href="https://share.snipd.com/episode/c2fdb8e4-6d49-4077-8d05-3524962b68b9">https://share.snipd.com/episode/c2fdb8e4-6d49-4077-8d05-3524962b68b9</a></div></td></tr>
+<tr><td class="num">23</td><td><b>AI For Pharma Growth E236 — Raviv Pryluk (PhaseV)</b><div class="url"><a href="https://exa.ai/library/podcast/9qhknptfkd8/episode/tgd6xc90mnl">https://exa.ai/library/podcast/9qhknptfkd8/episode/tgd6xc90mnl</a></div></td></tr>
+<tr><td class="num">24</td><td><b>AI For Pharma Growth E239 — Clara Bernardes (Biorce)</b><div class="url"><a href="https://exa.ai/library/podcast/9qhknptfkd8/episode/b6pdwr1t33v">https://exa.ai/library/podcast/9qhknptfkd8/episode/b6pdwr1t33v</a></div></td></tr>
+<tr><td class="num">25</td><td><b>Beyond Compliance — Joseph Geraci (NetraMark)</b><div class="url"><a href="https://exa.ai/library/podcast/0j3s1prbn0q/episode/ml14xzyrypm">https://exa.ai/library/podcast/0j3s1prbn0q/episode/ml14xzyrypm</a></div></td></tr>
+<tr><td class="num">26</td><td><b>Applied Clinical Trials — ACT Brief, 20 Aug 2026</b><div class="url"><a href="https://exa.ai/library/podcast/0j3s1prbn0q/episode/35s0rs0v03r">https://exa.ai/library/podcast/0j3s1prbn0q/episode/35s0rs0v03r</a></div></td></tr>
+<tr><td class="num">27</td><td><b>Applied Clinical Trials — ACT Brief, 10 Sep 2026</b><div class="url"><a href="https://exa.ai/library/podcast/0j3s1prbn0q/episode/zmgz419d3fr">https://exa.ai/library/podcast/0j3s1prbn0q/episode/zmgz419d3fr</a></div></td></tr>
+<tr><td class="num">28</td><td><b>Med Tech Gurus — Anastasia Christianson (EPAM)</b><div class="url"><a href="https://exa.ai/library/podcast/b88bzb75fkm/episode/p2rz6cfclnn">https://exa.ai/library/podcast/b88bzb75fkm/episode/p2rz6cfclnn</a></div></td></tr>
+<tr><td class="num">29</td><td><b>Pharma Prescribed — Henrik Nakskov</b><div class="url"><a href="https://pharmaprescribed.podbean.com/e/an-ai-cant-ask-questions-of-the-future-data-trust-in-clinical-research/">https://pharmaprescribed.podbean.com/e/an-ai-cant-ask-questions-of-the-future-data-trust-in-clinical-research/</a></div></td></tr>
+<tr><td class="num">30</td><td><b>The AI in Business Podcast (Emerj) — Mukhtar Ahmed</b><div class="url"><a href="https://spoken.md/episode/where-ai-should-actually-earn-its-keep-in-biopharma-1000792143206">https://spoken.md/episode/where-ai-should-actually-earn-its-keep-in-biopharma-1000792143206</a></div></td></tr>
+<tr><td class="num">31</td><td><b>The Future of Healthcare AI — Ephemeral (David & Goldstein)</b><div class="url"><a href="https://pod.wave.co/podcast/the-future-of-healthcare-ai/outcomes-backwards-jeremy-david-and-drew-goldstein-on-palantir-ephemeral-and-rethinking-drug-develop">https://pod.wave.co/podcast/the-future-of-healthcare-ai/outcomes-backwards-jeremy-david-and-drew-goldstein-on-palantir-ephemeral-and-rethinking-drug-develop</a></div></td></tr>
+<tr><td class="num">32</td><td><b>The Signal Room ep51 — Dr. AJ Blood (RECTIFIER / AIwithCare)</b><div class="url"><a href="https://signalroompodcast.com/episodes/ai-clinical-trial-screening">https://signalroompodcast.com/episodes/ai-clinical-trial-screening</a></div></td></tr>
+<tr><td class="num">33</td><td><b>The Signal Room ep57 — Declan Kelly (Eolas Medical)</b><div class="url"><a href="https://signalroompodcast.com/episodes/clinical-ai-hospital-knowledge">https://signalroompodcast.com/episodes/clinical-ai-hospital-knowledge</a></div></td></tr>
+<tr><td class="num">34</td><td><b>FDA Watch ep55 — Brian Malkin</b><div class="url"><a href="https://exa.ai/library/podcast/27zx2442g6m/episode/8gd3lxv9r84">https://exa.ai/library/podcast/27zx2442g6m/episode/8gd3lxv9r84</a></div></td></tr>
+<tr><td class="num">35</td><td><b>Critical Path Institute — How NAMs are Redefining Drug Development</b><div class="url"><a href="https://c-path.org/how-nams-are-redefining-drug-development/">https://c-path.org/how-nams-are-redefining-drug-development/</a></div></td></tr>
+<tr><td class="num">36</td><td><b>The a16z Show — Karan Singhal (OpenAI)</b><div class="url"><a href="https://podcastrex.com/shows/the-a16z-show/what-happens-when-everyone-has-a-health-expert-in-their-pocket-openais-karan-singhal/transcript">https://podcastrex.com/shows/the-a16z-show/what-happens-when-everyone-has-a-health-expert-in-their-pocket-openais-karan-singhal/transcript</a></div></td></tr>
+<tr><td class="num">37</td><td><b>NEJM AI Grand Rounds — Michał Nedoszytko (Abridge)</b><div class="url"><a href="https://ai-podcast.nejm.org/e/abridge-s-dr-michal-nedoszytko-on-physicians-who-build-software/">https://ai-podcast.nejm.org/e/abridge-s-dr-michal-nedoszytko-on-physicians-who-build-software/</a></div></td></tr>
+<tr><td class="num">38</td><td><b>JAMA / JN Learning — Roy Perlis with Kevin Roose</b><div class="url"><a href="https://edhub.ama-assn.org/jn-learning/audio-player/19102704">https://edhub.ama-assn.org/jn-learning/audio-player/19102704</a></div></td></tr>
+<tr><td class="num">39</td><td><b>Critical Care Scenarios — Lightning Rounds 73, Harvey Castro</b><div class="url"><a href="https://podcastrex.com/shows/critical-care-scenarios/lightning-rounds-73-how-to-use-ai-in-medicine-with-harvey-castro/transcript">https://podcastrex.com/shows/critical-care-scenarios/lightning-rounds-73-how-to-use-ai-in-medicine-with-harvey-castro/transcript</a></div></td></tr>
+<tr><td class="num">40</td><td><b>Healthcare Unfiltered ep302 — Anai Kothari</b><div class="url"><a href="https://exa.ai/library/podcast/qx1r9myjmwn/episode/f9pknhv90jr">https://exa.ai/library/podcast/qx1r9myjmwn/episode/f9pknhv90jr</a></div></td></tr>
+<tr><td class="num">41</td><td><b>CareTalk — Munjal Shah (Hippocratic AI)</b><div class="url"><a href="https://exa.ai/library/podcast/0th62bf2yxn/episode/l1g4hxnvz4l">https://exa.ai/library/podcast/0th62bf2yxn/episode/l1g4hxnvz4l</a></div></td></tr>
+<tr><td class="num">42</td><td><b>Voices in Oncology ep11 — David McSwain (UNC Health)</b><div class="url"><a href="https://exa.ai/library/podcast/z0rqwfc0j99/episode/c7nkg9mk0yp">https://exa.ai/library/podcast/z0rqwfc0j99/episode/c7nkg9mk0yp</a></div></td></tr>
+<tr><td class="num">43</td><td><b>AI and Healthcare — Gregory Goldgof (MSK, DeepHeme)</b><div class="url"><a href="https://podscan.fm/podcasts/ai-and-healthcare/episodes/how-ai-reads-blood-cells-to-help-diagnose-cancer-with-gregory-goldgof-md-phd">https://podscan.fm/podcasts/ai-and-healthcare/episodes/how-ai-reads-blood-cells-to-help-diagnose-cancer-with-gregory-goldgof-md-phd</a></div></td></tr>
+<tr><td class="num">44</td><td><b>KFF Business of Health ep21 — Sarah Teichmann (Human Cell Atlas)</b><div class="url"><a href="https://www.kff.org/other-health/can-ai-find-the-cure/">https://www.kff.org/other-health/can-ai-find-the-cure/</a></div></td></tr>
+<tr><td class="num">45</td><td><b>A Question of Science — Brian Cox, Francis Crick Institute panel</b><div class="url"><a href="https://exa.ai/library/podcast/8mt5yt71t3h/episode/zvhbw42lhdv">https://exa.ai/library/podcast/8mt5yt71t3h/episode/zvhbw42lhdv</a></div></td></tr>
+<tr><td class="num">46</td><td><b>Signal and Symptoms ep57 — Harvey Castro & Junaid Kalia</b><div class="url"><a href="https://exa.ai/library/podcast/lfw6vjbtf0q/episode/qw17hjwjyx8">https://exa.ai/library/podcast/lfw6vjbtf0q/episode/qw17hjwjyx8</a></div></td></tr>
+<tr><td class="num">47</td><td><b>Exa — podcast index announcement (the index used for discovery)</b><div class="url"><a href="https://exa.ai/blog/podcast-search">https://exa.ai/blog/podcast-search</a></div></td></tr>
+</table>
+</body></html>
