@@ -85,6 +85,14 @@ Read these before citing anything.
   by hand from publish fields.
 - Nothing here is investment or medical advice.
 
+## Enabling the live site
+
+Pages is served from `main` → `/docs`. If the link above 404s, Pages has not been switched on
+yet — **Settings → Pages → Source: "Deploy from a branch" → Branch: `main`, folder: `/docs` → Save**.
+It goes live about a minute later at
+`https://az9713.github.io/claude-exa-podcast-report/`. No build step or workflow is required;
+the `docs/` folder is plain static HTML.
+
 ## Inspiration
 
 This exists because of
